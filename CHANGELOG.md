@@ -1,0 +1,39 @@
+# Change Log/Revision History
+
+1.0.8 
+-----
+* Update with latest libraries
+
+1.0.7
+-----
+* OBX.cs updated 'base64' to 'Base64' as per spec
+
+1.0.6
+-----
+* Changed unzipping function to use ZipFile instead of ZipStream, to address an unzip bug with zip files created with Java zip library.
+
+1.0.5
+-----
+* Fixed issue with extra newline character.
+
+1.0.4
+-----
+* Alignment with CDA package 1.0 - Pathname not fixed to IHE_XDM.
+
+1.0.3
+-----
+* Fixed bug with the wrong segments being read during hydration.
+
+1.0.2
+-----
+* Fixed bug with separators.
+
+1.0.1
+-----
+* Added functionality to extract the root CDA document from a valid MDM / zip package
+
+1.0.0 
+-----
+* Refactored the library so the object names align to the HL7 objects.
+
+
