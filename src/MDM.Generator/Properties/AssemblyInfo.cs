@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MDM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("MDM.Generator")]
+[assembly: AssemblyDescription("A library for packaging CDA documents in HL7 messages")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ADHA")]
-[assembly: AssemblyProduct("MDM")]
-[assembly: AssemblyCopyright("Copyright © 2017")]
+[assembly: AssemblyCompany("Australian Digital Health Agency")]
+[assembly: AssemblyProduct("MDM.Generator")]
+[assembly: AssemblyCopyright("Copyright ©2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,6 +30,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.8.0")]
-[assembly: AssemblyFileVersion("1.0.8.0")]
+[assembly: AssemblyVersion("1.0.8.1")]
+[assembly: AssemblyFileVersion("1.0.8.1")]
