@@ -20,14 +20,14 @@ namespace MDM.Sample
             {
                 var currentPath = String.Empty;
 
-                if (Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample\\") != -1)
+                if (Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample" + Path.DirectorySeparatorChar, StringComparison.CurrentCulture) != -1)
                 {
-                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample\\") + 11);
+                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample" + Path.DirectorySeparatorChar, StringComparison.CurrentCulture) + 11);
                 }
 
-                if (String.IsNullOrEmpty(currentPath) && Directory.GetCurrentDirectory().LastIndexOf("MDM\\") != -1)
+                if (String.IsNullOrEmpty(currentPath) && Directory.GetCurrentDirectory().LastIndexOf("MDM" + Path.DirectorySeparatorChar, StringComparison.CurrentCulture) != -1)
                 {
-                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM\\") + 4) + "MDM.Sample\\";
+                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM" + Path.DirectorySeparatorChar, StringComparison.CurrentCulture) + 4) + "MDM.Sample"+Path.DirectorySeparatorChar;
                 }
 
                 return currentPath;
@@ -185,7 +185,7 @@ namespace MDM.Sample
                 Code = "18842-5",
                 Description = "Discharge Summarization Note",
                 Descriptor = "LN",
-                FilePath = CurrentDirectory + @"Output\package.zip"
+                FilePath = CurrentDirectory + @"Output"+Path.DirectorySeparatorChar+"package.zip"
                 //ZipPackageAsBase64String = "This is the base64 string representing the package; and can be set manually if you dont have a file / file path"
             };
 
