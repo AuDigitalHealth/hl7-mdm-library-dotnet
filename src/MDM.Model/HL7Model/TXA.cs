@@ -17,7 +17,7 @@ namespace MDM.Model.HL7Model
         #region Properties
 
         /// <summary>
-        /// Document conent presentation
+        /// Document content presentation
         /// </summary>
         private DocumentContentPresentation? _documentContentPresentation;
         public DocumentContentPresentation? DocumentContentPresentation

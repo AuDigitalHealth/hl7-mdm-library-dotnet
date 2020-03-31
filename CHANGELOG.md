@@ -1,5 +1,13 @@
 # Change Log/Revision History
 
+
+1.1.0 
+-----
+* Add functionality to generate the ACK^T02 for the MDM^T02
+* MSH.16 change to AL
+
+1.0.8.2
+-------
 No version change 1.0.8 (.2)
 Updated DotNetZip from 1.9.1.8 to 1.11.0 due to a security vulnerability (High severity). 
 

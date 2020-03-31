@@ -62,7 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\NameAttribute.cs" />
-    <Compile Include="Enums\AcceptAcknowlegement.cs" />
+    <Compile Include="Enums\AcknowledgmentCode.cs" />
+    <Compile Include="Enums\AcceptAcknowledgement.cs" />
     <Compile Include="Enums\DocumentContentPresentation.cs" />
     <Compile Include="Enums\ObservationResultStatus.cs" />
     <Compile Include="Enums\DocumentCompletionStatus.cs" />

@@ -10,11 +10,16 @@ namespace MDM.Model.HL7Model
     /// </summary>
     public class HL7Model
     {
-        #region Properteis
+        #region Properties
         /// <summary>
         /// MSH
         /// </summary>
         public MSH MSH { get; set; }
+
+        /// <summary>
+        /// MSA - Only for Acknowledgements
+        /// </summary>
+        public MSA MSA { get; set; }
 
         /// <summary>
         /// Event Type
@@ -82,6 +87,27 @@ namespace MDM.Model.HL7Model
                 throw new ValidationException(validationBuilder.Messages, "Please cast this exception back to a ValidationException to see the collection of validation errors");
             }
         }
+
+        internal void ValidateAck(String path, List<ValidationMessage> messages)
+        {
+            var validationBuilder = new ValidationBuilder(path, messages);
+
+            if (validationBuilder.ArgumentRequiredCheck(validationBuilder.Path + "MSH", MSH))
+            {
+                MSH.Validate(validationBuilder.PathName, validationBuilder.Messages);
+            }
+
+            if (validationBuilder.ArgumentRequiredCheck(validationBuilder.Path + "MSA", MSA))
+            {
+                MSA.Validate(validationBuilder.PathName, validationBuilder.Messages);
+            }
+
+            if (validationBuilder.Messages.Count > 0)
+            {
+                throw new ValidationException(validationBuilder.Messages, "Please cast this exception back to a ValidationException to see the collection of validation errors");
+            }
+        }
+
         #endregion
     }
 }

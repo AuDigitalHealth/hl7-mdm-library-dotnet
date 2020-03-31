@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using MDM.Common.Enums;
 
 namespace MDM.Sample
 {
@@ -55,6 +56,14 @@ namespace MDM.Sample
                 //Extracts and saves the CDA document from within the payload of the MDM message
                 //E.g. looks for the package.zip and extracts the CDA document from within this.
                 Sample.ExtractCDAdocumentFromMDM(hl7Model);
+
+                var hl7Ack = Sample.GenerateHl7AckMessage(mdmMessage, Guid.NewGuid().ToString(), AcknowledgmentCode.ApplicationAccept);
+
+                string filename = CurrentDirectory + @"Output\hl7AckMessage.hl7";
+
+                File.WriteAllText(filename, hl7Ack);
+
+
             }
         }
     }

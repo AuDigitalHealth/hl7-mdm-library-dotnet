@@ -63,14 +63,14 @@ namespace MDM.Model.HL7Model
         /// 
         /// MSH.15
         /// </summary>
-        private AcceptAcknowlegement? _acceptAcknowledgementType;
-        internal AcceptAcknowlegement? AcceptAcknowledgementType
+        private AcceptAcknowledgement? _acceptAcknowledgementType;
+        internal AcceptAcknowledgement? AcceptAcknowledgementType
         {
             get
             {
                 if (!_acceptAcknowledgementType.HasValue)
                 {
-                    _acceptAcknowledgementType = AcceptAcknowlegement.Never;
+                    _acceptAcknowledgementType = AcceptAcknowledgement.Never;
                 }
                 return _acceptAcknowledgementType;
             }
@@ -80,14 +80,14 @@ namespace MDM.Model.HL7Model
             }
         }
 
-        private AcceptAcknowlegement? _applicationAcknowledgementType;
-        internal AcceptAcknowlegement? ApplicationAcknowledgementType
+        private AcceptAcknowledgement? _applicationAcknowledgementType;
+        internal AcceptAcknowledgement? ApplicationAcknowledgementType
         {
             get
             {
                 if (!_applicationAcknowledgementType.HasValue)
                 {
-                    _applicationAcknowledgementType = AcceptAcknowlegement.Never;
+                    _applicationAcknowledgementType = AcceptAcknowledgement.Always;
                 }
                 return _applicationAcknowledgementType;
             }

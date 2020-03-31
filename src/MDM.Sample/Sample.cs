@@ -108,6 +108,13 @@ namespace MDM.Sample
             File.WriteAllBytes(filePath, zipFile);
         }
 
+        public static String GenerateHl7AckMessage(String hl7Message, string newControlId, AcknowledgmentCode acknowledgmentCode)
+        {
+            // Generate Message
+            return MDMGenerator.CreateHL7AckFromMdm(hl7Message, newControlId, acknowledgmentCode); ;
+        }
+
+
         #region methods
         private static HL7Model PopulateModel()
         {
@@ -118,7 +125,7 @@ namespace MDM.Sample
                 ReceivingFacility = new HD { NamespaceID = "800362000022222", UniversalID = "1.2.36.1.2001.1003.0.800362000022222", UniversalIDType = "ISO" },
                 SendingApplication = new HD { NamespaceID = "Good Hospital" },
                 SendingFacility = new HD { NamespaceID = "8003620833333783", UniversalID = "1.2.36.1.2001.1003.0.8003620833333783", UniversalIDType = "ISO" },
-                MessageControlId = new UniqueId().ToString().Replace("urn:uuid:", "")
+                MessageControlId = Guid.NewGuid().ToString()
             };
 
             //Create the event EVN
@@ -135,7 +142,8 @@ namespace MDM.Sample
                     StreetAddress = "1 Australia Lane",
                     City = "North Adelaide",
                     State = "SA",
-                    PostCode = "5006"
+                    PostCode = "5006",
+                    Country = Country.Australia
                 },
                 BirthDateTime = Convert.ToDateTime("01 Jan 1977"),
                 Gender = Gender.Female,

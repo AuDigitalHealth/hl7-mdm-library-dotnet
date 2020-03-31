@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HL7Model\HD.cs" />
+    <Compile Include="HL7Model\MSA.cs" />
     <Compile Include="HL7Model\XCN.cs" />
     <Compile Include="HL7Model\CX.cs" />
     <Compile Include="HL7Model\XAD.cs" />

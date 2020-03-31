@@ -20,6 +20,13 @@ namespace MDM.Common.Enums
         [EnumMember]
         Undefined,
 
+        /// <summary>
+        /// AUS
+        /// </summary>
+        [EnumMember]
+        [Name(Code = "AUS", Name = "Australia", AlternateCode = "AUS")]
+        AUS,
+
 
         /// <summary>
         /// Australia

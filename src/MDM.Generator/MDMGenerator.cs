@@ -20,7 +20,7 @@ namespace MDM.Generator
         /// <summary>
         /// This method takes creates an HL7 MDM message
         /// </summary>
-        /// <param name="model">The model containing the parameters requried to create the message</param>
+        /// <param name="model">The model containing the parameters required to create the message</param>
         /// <returns>An HL7 message as a string</returns>
         public static String CreateHL7Message(HL7Model model)
         {
@@ -71,7 +71,7 @@ namespace MDM.Generator
         /// <returns>HL7Model</returns>
         public static HL7Model UnwrapHL7Message(String mdmMessage)
         {
-            //Split the message up, extracting the MSH, OBX etc into an arrary
+            //Split the message up, extracting the MSH, OBX etc into an array
             var components = SplitHL7MessageIntoComponentParts(mdmMessage);
 
             return UnwrapHL7Message(components);
@@ -214,6 +214,85 @@ namespace MDM.Generator
             return returnArray;
         }
 
+
+        /// <summary>
+        /// This method takes in a list of strings that make up an MDM message
+        /// </summary>
+        /// <param name="mdmMessageComponents">mdmMessageComponents</param>
+        /// <returns>HL7Model</returns>
+        public static String CreateHL7AckFromMdm(String mdmMessage, String newMessageControlId, AcknowledgmentCode acknowledgmentCode)
+        {
+            //Split the message up, extracting the MSH, OBX etc into an array
+            var components = SplitHL7MessageIntoComponentParts(mdmMessage);
+
+            // MDM^T02 Message
+            HL7Model message = UnwrapHL7Message(components);
+
+            // Make copies
+            var mdmMessageControlId = message.MSH.MessageControlId;
+            var mdmSendingApplication = message.MSH.SendingApplication;
+            var mdmSendingFacility = message.MSH.SendingFacility;
+            var mdmReceivingApplication = message.MSH.ReceivingApplication;
+            var mdmReceivingFacility = message.MSH.ReceivingFacility;
+
+            // Prepare message for ACK^T02
+            // MSA
+            var msa = new MSA();
+            msa.MessageControlID = mdmMessageControlId;
+            msa.SendingApplication = acknowledgmentCode;
+            message.MSA = msa;
+
+            // MSH - Swap 3,4 and 5,6 around, Create new messageId, update message type and datetime stamp
+            message.MSH.SendingApplication = mdmReceivingApplication;
+            message.MSH.SendingFacility = mdmReceivingFacility;
+            message.MSH.ReceivingApplication = mdmSendingApplication;
+            message.MSH.ReceivingFacility = mdmSendingFacility;
+            message.MSH.MessageType = "ACK^T02^ACK_T02";
+            message.MSH.MessageControlId = newMessageControlId;
+            message.MSH.MessageDateTime = HL7Helper.MessageDateTime;
+            
+            return CreateHL7AckMessage(message);
+        }
+
+        /// <summary>
+        /// This method takes creates an HL7 ACK^T02 message
+        /// </summary>
+        /// <param name="model">The model containing the parameters required to create the message</param>
+        /// <returns>An HL7 message as a string</returns>
+        public static String CreateHL7AckMessage(HL7Model model)
+        {
+            String hl7MessageString = null;
+
+            var validationMessages = new List<ValidationMessage>();
+
+            try
+            {
+                model.ValidateAck("Model", validationMessages);
+
+                var messageHeader = PopulateMessageHeader(model.MSH);
+                var ackType = PopulateMsaType(model.MSA);
+
+                hl7MessageString = messageHeader + ackType;
+
+            }
+            catch (ValidationException valEx)
+            {
+                var messages = valEx.Messages;
+
+                //handle the exception here
+                throw;
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+
+                //handle the exception here
+                throw;
+            }
+
+            return hl7MessageString;
+        }
+
         #region Private Methods
         private static String PopulateMessageHeader(MSH msh)
         {
@@ -315,6 +394,16 @@ namespace MDM.Generator
             messageHeader += HL7Helper.NewLine;
 
             return messageHeader;
+        }
+
+        private static String PopulateMsaType(MSA msa)
+        {
+            //Msa type code
+            var msaType = "MSA" + HL7Helper.FieldSeperator;
+            msaType += msa.SendingApplication.GetAttributeValue<NameAttribute, String>(x => x.Code);
+                       msaType += HL7Helper.FieldSeperator + msa.MessageControlID + HL7Helper.NewLine;
+
+            return msaType;
         }
 
         private static String PopulateEventType(EVN evn)
@@ -531,7 +620,7 @@ namespace MDM.Generator
             documentTranscriptionHeader += HL7Helper.FieldSeperator;
             documentTranscriptionHeader += HL7Helper.FieldSeperator;
 
-            //Unique document number (UUID)
+            //Unique document number (GUID)
             documentTranscriptionHeader += HL7Helper.FieldSeperator;
             documentTranscriptionHeader += txa.UniqueDocumentNumber;
 
@@ -718,7 +807,6 @@ namespace MDM.Generator
                     if (mshFields.Length >= 10)
                     {
                         msh.MessageControlId = mshFields[9];
-
                     }
 
                     //ProcessingID
@@ -736,13 +824,13 @@ namespace MDM.Generator
                     //Accept acknowledgement type
                     if (mshFields.Length >= 15)
                     {
-                        msh.AcceptAcknowledgementType = Extensions.GetEnumByAttributeValue<NameAttribute, AcceptAcknowlegement>(typeof(AcceptAcknowlegement), x => { if (x != null) { return x.Code == mshFields[14]; } return false; });
+                        msh.AcceptAcknowledgementType = Extensions.GetEnumByAttributeValue<NameAttribute, AcceptAcknowledgement>(typeof(AcceptAcknowledgement), x => { if (x != null) { return x.Code == mshFields[14]; } return false; });
                     }
 
                     //Accept acknowledgement type
                     if (mshFields.Length >= 16)
                     {
-                        msh.ApplicationAcknowledgementType = Extensions.GetEnumByAttributeValue<NameAttribute, AcceptAcknowlegement>(typeof(AcceptAcknowlegement), x => { if (x != null) { return x.Code == mshFields[15]; } return false; });
+                        msh.ApplicationAcknowledgementType = Extensions.GetEnumByAttributeValue<NameAttribute, AcceptAcknowledgement>(typeof(AcceptAcknowledgement), x => { if (x != null) { return x.Code == mshFields[15]; } return false; });
                     }
 
                     //Accept acknowledgement type
@@ -1243,5 +1331,6 @@ namespace MDM.Generator
             return txa;
         }
         #endregion
+
     }
 }

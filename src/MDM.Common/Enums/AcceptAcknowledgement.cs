@@ -6,11 +6,11 @@ using MDM.Common.Attributes;
 namespace MDM.Common.Enums
 {
     /// <summary>
-    /// This enum contains the valid Accept Acknowlegement entries
+    /// This enum contains the valid Accept Acknowledgement entries
     /// </summary>
     [Serializable]
     [DataContract]
-    public enum AcceptAcknowlegement
+    public enum AcceptAcknowledgement
     {
         /// <summary>
         /// Undefined, this is the default value if the enum is left unset.
