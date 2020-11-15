@@ -178,6 +178,12 @@ namespace MDM.Sample
                 }
             };
 
+            //Create the patient visit information (PV1) - use this format when Consulting Doctor Unknown
+            //var patientVisitWhenConsultingDoctorUnknown = new PV1
+            //{
+            //    ConsultingDoctor = null
+            //};
+
 
             //Create the Transcription Document Header (TXA)
             var transcriptionDocumentHeader = new TXA

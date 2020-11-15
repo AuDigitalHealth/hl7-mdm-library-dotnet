@@ -1,7 +1,7 @@
 del *.nupkg
 
 nuget restore
-
+msbuild 
 msbuild MedicalDocumentManagement.sln /p:Configuration=Release
 
 NuGet.exe pack MDM.Generator/MDM.Generator.csproj -Properties Configuration=Release -IncludeReferencedProjects

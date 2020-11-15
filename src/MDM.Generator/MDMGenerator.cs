@@ -546,45 +546,50 @@ namespace MDM.Generator
             patientVisit += HL7Helper.FieldSeperator;
             patientVisit += HL7Helper.FieldSeperator;
             patientVisit += HL7Helper.FieldSeperator;
-
-            //Consulting Doctor
             patientVisit += HL7Helper.FieldSeperator;
-            patientVisit += pv1.ConsultingDoctor.ID;
-
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += pv1.ConsultingDoctor.FamilyName;
             
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += pv1.ConsultingDoctor.GivenName;
-            
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += pv1.ConsultingDoctor.MiddleName;
-
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += pv1.ConsultingDoctor.Suffix;
-
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += pv1.ConsultingDoctor.Prefix;
-            
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += pv1.ConsultingDoctor.Degree;
-
-            patientVisit += HL7Helper.ValueSeperator;
-            //Source table
-
-            patientVisit += HL7Helper.ValueSeperator;
-            if(pv1.ConsultingDoctor.AssigningAuthority != null)
+            //Consulting Doctor
+            if (pv1.ConsultingDoctor != null)
             {
-                patientVisit += pv1.ConsultingDoctor.AssigningAuthority.NamespaceID;
+
+
+                patientVisit += pv1.ConsultingDoctor.ID;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += pv1.ConsultingDoctor.FamilyName;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += pv1.ConsultingDoctor.GivenName;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += pv1.ConsultingDoctor.MiddleName;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += pv1.ConsultingDoctor.Suffix;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += pv1.ConsultingDoctor.Prefix;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += pv1.ConsultingDoctor.Degree;
+
+                patientVisit += HL7Helper.ValueSeperator;
+                //Source table
+
+                patientVisit += HL7Helper.ValueSeperator;
+                if (pv1.ConsultingDoctor.AssigningAuthority != null)
+                {
+                    patientVisit += pv1.ConsultingDoctor.AssigningAuthority.NamespaceID;
+                }
+
+                //Spacers
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += HL7Helper.ValueSeperator;
+                patientVisit += HL7Helper.ValueSeperator;
+
+                patientVisit += pv1.ConsultingDoctor.IdentifierTypeCode;
             }
-
-            //Spacers
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += HL7Helper.ValueSeperator;
-            patientVisit += HL7Helper.ValueSeperator;            
-            patientVisit += HL7Helper.ValueSeperator;
-
-            patientVisit += pv1.ConsultingDoctor.IdentifierTypeCode;
 
             patientVisit += HL7Helper.NewLine;
 
@@ -1194,10 +1199,10 @@ namespace MDM.Generator
                     {
                         var consultingDoctorValues = patientVisitValues[9].Split(HL7Helper.ValueSeperator);
                         
-                        if(consultingDoctorValues.Length > 0)
+                        if (!string.IsNullOrWhiteSpace(patientVisitValues[9]) && consultingDoctorValues.Length > 0)
                         {
                             //ID
-                            if(consultingDoctorValues.Length >= 1)
+                            if (consultingDoctorValues.Length >= 1)
                             {
                                 pv1.ConsultingDoctor.ID = consultingDoctorValues[0];
                             }
@@ -1255,6 +1260,10 @@ namespace MDM.Generator
                             {
                                 pv1.ConsultingDoctor.IdentifierTypeCode = consultingDoctorValues[12];
                             }
+                        }
+                        else
+                        {
+                            pv1.ConsultingDoctor = null;
                         }
                         
                     }

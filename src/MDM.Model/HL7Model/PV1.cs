@@ -66,10 +66,11 @@ namespace MDM.Model.HL7Model
         {
             var validationBuilder = new ValidationBuilder(path, messages);
 
-            if (validationBuilder.ArgumentRequiredCheck(validationBuilder.PathName + "ConsultingDoctor", ConsultingDoctor))
-            {
-                ConsultingDoctor.Validate(validationBuilder.Path, validationBuilder.Messages);
-            }
+            //Optional now (12/11/2020)
+            //if (validationBuilder.ArgumentRequiredCheck(validationBuilder.PathName + "ConsultingDoctor", ConsultingDoctor))
+            //{
+            //    ConsultingDoctor.Validate(validationBuilder.Path, validationBuilder.Messages);
+            //}
         }
         #endregion
     }

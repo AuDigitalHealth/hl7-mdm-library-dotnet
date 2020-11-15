@@ -1,5 +1,8 @@
 # Change Log/Revision History
 
+1.2.0 
+-----
+* make PV1.9 Consulting Doctor optional
 
 1.1.0 
 -----
