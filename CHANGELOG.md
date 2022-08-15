@@ -1,5 +1,9 @@
 # Change Log/Revision History
 
+1.3.0
+=====
+Added support for netstandard2.0
+
 1.2.0 
 -----
 * make PV1.9 Consulting Doctor optional
