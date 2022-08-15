@@ -1,7 +1,5 @@
 del *.nupkg
 
-msbuild MedicalDocumentManagement.sln /p:Configuration=Release
-
 REM Use dotnet for packaging now
 REM NuGet.exe pack MDM.Generator/MDM.Generator.csproj -Properties Configuration=Release -IncludeReferencedProjects
 dotnet pack .\MDM.Generator\MDM.Generator.csproj -c Release -o .

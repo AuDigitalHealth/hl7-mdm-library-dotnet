@@ -22,6 +22,9 @@
     <PackageReference Include="Nehta.VendorLibrary.Common" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="MDM.Generator" />
+  </ItemGroup>  
+  <ItemGroup>
     <Compile Remove="HL7Model\AL1.cs" />
     <Compile Remove="HL7Model\DG1.cs" />
   </ItemGroup>
