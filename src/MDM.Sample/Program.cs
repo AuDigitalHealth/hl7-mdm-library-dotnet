@@ -10,20 +10,20 @@ namespace MDM.Sample
         /// <summary>
         /// Returns the directory that this programe is being exectured from.
         /// </summary>
-        public static String CurrentDirectory
+       public static String CurrentDirectory
         {
             get
             {
                 var currentPath = String.Empty;
 
-                if (Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample\\") != -1)
+                if (Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample"+Path.DirectorySeparatorChar) != -1)
                 {
-                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample\\") + 11);
+                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM.Sample"+ Path.DirectorySeparatorChar) + 11);
                 }
 
-                if (String.IsNullOrEmpty(currentPath) && Directory.GetCurrentDirectory().LastIndexOf("MDM\\") != -1)
+                if (String.IsNullOrEmpty(currentPath) && Directory.GetCurrentDirectory().LastIndexOf("MDM"+ Path.DirectorySeparatorChar) != -1)
                 {
-                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM\\") + 4) + "MDM.Sample\\";
+                    currentPath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf("MDM"+ Path.DirectorySeparatorChar) + 4) + "MDM.Sample"+ Path.DirectorySeparatorChar;
                 }
 
                 return currentPath;
@@ -36,13 +36,13 @@ namespace MDM.Sample
             var mdmSample = Sample.MDMSample();
 
             //Writes the MDM message to the path provided
-            using (var outfile = new StreamWriter(CurrentDirectory + @"Output\hl7Message.hl7"))
+            using (var outfile = new StreamWriter(CurrentDirectory + @"Output"+ Path.DirectorySeparatorChar + "hl7Message.hl7"))
             {
                 outfile.Write(mdmSample);
             }
 
             //Loads the MDM message from the path provided
-            using(var inputFile = new StreamReader(CurrentDirectory + @"Output\hl7Message.hl7"))
+            using(var inputFile = new StreamReader(CurrentDirectory + @"Output" + Path.DirectorySeparatorChar + "hl7Message.hl7"))
             {
                 var mdmMessage = inputFile.ReadToEnd();
 
@@ -51,7 +51,7 @@ namespace MDM.Sample
                 var hl7Model = Sample.UnwrapMDM(mdmMessage);
 
                 //Extracts and saves the zip file payload
-                Sample.ExtractAndSaveZipFileFromMDM(mdmMessage, CurrentDirectory + @"Output\extractedFile.zip");
+                Sample.ExtractAndSaveZipFileFromMDM(mdmMessage, CurrentDirectory + @"Output" + Path.DirectorySeparatorChar + "extractedFile.zip");
 
                 //Extracts and saves the CDA document from within the payload of the MDM message
                 //E.g. looks for the package.zip and extracts the CDA document from within this.
