@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Ionic.Zip;
 
 namespace MDM.Common
 {
@@ -147,20 +147,10 @@ namespace MDM.Common
         ///<param name="zipBytes">zipBytes</param>
         public static XmlDocument GetCDADocumentFromZip(byte[] zipBytes)
         {
-            Dictionary<String, byte[]> entries;
-            using(var inputStream = new MemoryStream(zipBytes))
-            {
-                entries = GetZipEntriesFromZipStream(ZipFile.Read(inputStream));
-
-                //using(var zipStream = new ZipInputStream(inputStream))
-                //{
-                //    entries = GetZipEntriesFromZipStream(zipStream);
-                //}
-            }
+            Dictionary<string, byte[]> entries = GetZipEntriesFromZipStream(zipBytes);
 
             // Get root document
             var rootDoc = entries.FirstOrDefault(a => Regex.IsMatch(a.Key.ToUpper(), @"CDA_ROOT.XML"));
-
             var cdaDocument = new XmlDocument();
 
             using (var cdaDocumentStream = new MemoryStream(rootDoc.Value))
@@ -171,57 +161,31 @@ namespace MDM.Common
             return cdaDocument;
         }
 
-        /*
-        /// <summary>
-        /// Obtain all the zip file entries and their content.
-        /// </summary>
-        /// <param name="zipStream">The ZipInputStream of the zip file.</param>
-        /// <returns>Zip file entries and their content.</returns>
-        internal static Dictionary<string, byte[]> GetZipEntriesFromZipStream(ZipInputStream zipStream)
-        {
-            var contentByFileName = new Dictionary<string, byte[]>();
-
-            ZipEntry entry;
-            while ((entry = zipStream.GetNextEntry()) != null)
-            {
-                if (!entry.IsDirectory)
-                {
-                    var content = new byte[entry.UncompressedSize];
-                    zipStream.Read(content, 0, content.Length);
-
-                    contentByFileName.Add(entry.FileName.ToUpper(), content);
-                }
-            }
-
-            return contentByFileName;
-        }
-        */
-
         /// <summary>
         /// Obtain all the zip file entries and their content.
         /// </summary>
         /// <param name="zipFile">The zip file.</param>
         /// <returns>Zip file entries and their content.</returns>
-        internal static Dictionary<string, byte[]> GetZipEntriesFromZipStream(ZipFile zipFile)
+        internal static Dictionary<string, byte[]> GetZipEntriesFromZipStream(byte[] zipFile)
         {
             var contentByFileName = new Dictionary<string, byte[]>();
+            var inputStream = new MemoryStream(zipFile);
 
-            if (zipFile != null)
+            if (zipFile.Length > 0)
             {
-                // Iterate through all entries and add their filename and contents.
-                foreach (ZipEntry entry in zipFile.Entries)
+                using (ZipArchive zipArchive = new ZipArchive(inputStream, ZipArchiveMode.Read))
                 {
-                    var readStream = new MemoryStream();
-
-                    // Ony process files.
-                    if (!entry.IsDirectory)
+                    foreach (var entry in zipArchive.Entries)
                     {
-                        entry.Extract(readStream);
-                        contentByFileName.Add(entry.FileName, readStream.ToArray());
+                        // Ony process files.
+                        if (entry.Length > 0)
+                        {
+                            var output = new MemoryStream();
+                            entry.Open().CopyTo(output);
+                            contentByFileName.Add(entry.FullName, output.ToArray());
+                        }
                     }
                 }
-
-                zipFile.Dispose();
             }
 
             return contentByFileName;

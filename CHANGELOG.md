@@ -1,5 +1,9 @@
 # Change Log/Revision History
 
+1.4.0
+=====
+Removed DotNetZip library. No longer required as using System.IO.Compression.
+
 1.3.0
 =====
 Added support for netstandard2.0

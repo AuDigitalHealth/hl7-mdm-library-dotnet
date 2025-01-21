@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MDM.Common\MDM.Common.csproj" />
 	<ProjectReference Include="..\MDM.Generator\MDM.Generator.csproj" />
 	<ProjectReference Include="..\MDM.Model\MDM.Model.csproj" />
