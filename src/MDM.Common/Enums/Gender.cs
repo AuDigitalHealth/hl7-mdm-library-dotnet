@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-
 using MDM.Common.Attributes;
 
 namespace MDM.Common.Enums

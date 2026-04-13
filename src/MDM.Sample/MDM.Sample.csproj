@@ -3,14 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Company>Australian Digital Health Agency</Company>
-    <Copyright>Copyright ©2022</Copyright>
+    <Copyright>Copyright ©2026</Copyright>
     <Authors>Australian Digital Health Agency</Authors>
     <Description>MDM library Sample</Description>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MDM.Common\MDM.Common.csproj" />

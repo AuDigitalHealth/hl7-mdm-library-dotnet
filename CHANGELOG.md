@@ -1,5 +1,14 @@
 # Change Log/Revision History
 
+2.0.0
+=====
+Target Frameworks:
+net45 -> net472
+(+) net10.0
+
+Packages:
+System.IO.Compression limited to net472 target of MDM.Common
+
 1.4.0
 =====
 Removed DotNetZip library. No longer required as using System.IO.Compression.

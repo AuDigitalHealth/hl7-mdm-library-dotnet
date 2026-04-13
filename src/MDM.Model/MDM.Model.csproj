@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net472;net10.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -10,17 +10,19 @@
   </PropertyGroup>
   <!-- Package and assembly information -->
   <PropertyGroup>
-    <Version>1.4.0.0</Version>
+    <Version>2.0.0.0</Version>
     <Description>A library for packaging CDA documents in HL7 messages</Description>
     <Company>Australian Digital Health Agency</Company>
-    <Copyright>Copyright ©2022</Copyright>
+    <Copyright>Copyright ©2026</Copyright>
   </PropertyGroup>
+	<PropertyGroup>
+		<NoWarn>CS1591</NoWarn>
+	</PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\MDM.Common\MDM.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Nehta.VendorLibrary.Common" Version="4.3.0" />
-    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="Nehta.VendorLibrary.Common" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="MDM.Generator" />

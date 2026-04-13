@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net472;net10.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -10,12 +10,12 @@
   </PropertyGroup>
   <!-- Package and assembly information -->
   <PropertyGroup>
-    <Version>1.4.0.0</Version>
+    <Version>2.0.0.0</Version>
     <Description>A library for packaging CDA documents in HL7 messages</Description>
     <Company>Australian Digital Health Agency</Company>
     <Authors>$(Company)</Authors>
-    <Copyright>Copyright ©2022</Copyright>
-    <PackageReleaseNotes>Added netstandard2.0 compatible version of library</PackageReleaseNotes>
+    <Copyright>Copyright ©2026</Copyright>
+    <PackageReleaseNotes>Added net10, netstandard2.0 compatible version of library</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/AuDigitalHealth/hl7-mdm-library-dotnet</PackageProjectUrl>
     <PackageTags>ADHA Digital Health Nehta</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -25,8 +25,7 @@
     <ProjectReference Include="..\MDM.Model\MDM.Model.csproj" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Nehta.VendorLibrary.Common" Version="4.3.0" />
-    <PackageReference Include="System.IO.Compression" Version="4.3.0" />
+    <PackageReference Include="Nehta.VendorLibrary.Common" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\LICENSE.txt" Link="Properties\LICENSE.txt" PackagePath="LICENSE.txt" />
