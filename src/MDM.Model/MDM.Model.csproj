@@ -10,7 +10,7 @@
   </PropertyGroup>
   <!-- Package and assembly information -->
   <PropertyGroup>
-    <Version>2.0.0.0</Version>
+    <Version>2.0.1.0</Version>
     <Description>A library for packaging CDA documents in HL7 messages</Description>
     <Company>Australian Digital Health Agency</Company>
     <Copyright>Copyright ©2026</Copyright>
@@ -22,7 +22,7 @@
     <ProjectReference Include="..\MDM.Common\MDM.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Nehta.VendorLibrary.Common" Version="5.0.0" />
+    <PackageReference Include="Nehta.VendorLibrary.Common" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="MDM.Generator" />
